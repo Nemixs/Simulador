@@ -85,32 +85,63 @@
 
                     <div class="form-group">
                       <label class="col-md-3 control-label" for="Cuotas">Fecha Primer Pago <span class="text-danger">*</span></label>
-                      <div class="input-group input-group-in">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input data-input="daterangepicker" data-single-date-picker="true" data-show-dropdowns="true" class="form-control">
+                      <div class="col-md-5">
+                        <div class="input-group input-group-in">
+                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <input data-input="daterangepicker" data-single-date-picker="true" data-show-dropdowns="true" class="form-control">
+                        </div>
                       </div><!-- /input-group-in -->
                     </div><!--/form-group-->
 
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="address">Address <span class="text-danger">*</span></label>
+                      <label class="col-md-3 control-label" for="Cuotas">Agregar Meses de no Pago <span class="text-danger">*</span></label>
                       <div class="col-md-5">
-                        <input class="form-control" id="address" name="address">
+                        <input type="checkbox" class="js-switch" checked="checked">
                       </div>
                     </div><!-- /form-group -->
 
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="country">Country <span class="text-danger">*</span></label>
+                      <label class="col-md-3 control-label" for="address">Primer Mes <span class="text-danger">*</span></label>
                       <div class="col-md-5">
-                        <input type="hidden" name="country" id="country" style="width:100%">
+                        <select class="form-control" id="inputSelect">
+                          <option>Seleccione un Mes</option>
+                          <option>Enero</option>
+                          <option>Febrero</option>
+                          <option>Marzo</option>
+                          <option>Abril</option>
+                          <option>Mayo</option>
+                          <option>Junio</option>
+                          <option>Julio</option>
+                          <option>Agosto</option>
+                          <option>Septiembre</option>
+                          <option>Octubre</option>
+                          <option>Noviembre</option>
+                          <option>Diciembre</option>
+                        </select>
                       </div>
                     </div><!-- /form-group -->
 
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="briefNotes">Brief Notes</label>
+                      <label class="col-md-3 control-label" for="address">Segundo Mes <span class="text-danger">*</span></label>
                       <div class="col-md-5">
-                        <textarea class="autogrow form-control" name="briefNotes" id="briefNotes" rows="3"></textarea>
+                        <select class="form-control" id="inputSelect">
+                          <option>Seleccione un Mes</option>
+                          <option>Enero</option>
+                          <option>Febrero</option>
+                          <option>Marzo</option>
+                          <option>Abril</option>
+                          <option>Mayo</option>
+                          <option>Junio</option>
+                          <option>Julio</option>
+                          <option>Agosto</option>
+                          <option>Septiembre</option>
+                          <option>Octubre</option>
+                          <option>Noviembre</option>
+                          <option>Diciembre</option>
+                        </select>
                       </div>
                     </div><!-- /form-group -->
+                    
                   </div><!-- /.tab-pane -->
                   <div class="tab-pane fade" id="wizard3">
                     <h3 class="lead">Provide your payment details</h3>
@@ -178,59 +209,6 @@
             </div><!-- /.panel-body -->
           </div><!-- /.panel -->
 
-
-
-          <!-- DATE RANGE PICKER -->
-              <div class="panel" data-fill-color="true">
-                <div class="panel-heading">
-                  <h3 class="panel-title"><i class="icon-calendar fa-fw"></i> Date Range Picker</h3>
-                </div><!-- /panel-heading -->
-
-                <div class="panel-body">
-                  <form role="form">
-                    <div class="form-group">
-                      <label class="control-label">Single Date Picker</label>
-                      <div class="input-group input-group-in">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input data-input="daterangepicker" data-single-date-picker="true" data-show-dropdowns="true" class="form-control">
-                      </div><!-- /input-group-in -->
-                    </div><!--/form-group-->
-
-                    <div class="form-group">
-                      <label class="control-label">Single Date with Time Picker</label>
-                      <div class="input-group input-group-in">
-                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                        <input data-input="daterangepicker" data-time-picker="true" data-single-date-picker="true" class="form-control">
-                      </div><!-- /input-group-in -->
-                    </div><!--/form-group-->
-
-                    <div class="form-group">
-                      <label class="control-label">Basic Date Range Picker</label>
-                      <div class="input-group input-group-in">
-                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
-                        <input data-input="daterangepicker" data-opens="left" class="form-control">
-                      </div><!-- /input-group-in -->
-                    </div><!--/form-group-->
-
-                    <div class="form-group">
-                      <label class="control-label">Date & Time Picker</label>
-                      <div class="input-group input-group-in">
-                        <input data-input="daterangepicker" data-opens="left" data-time-picker="true" class="form-control">
-                        <span class="input-group-addon"><i class="icon-clock"></i></span>
-                      </div><!-- /input-group-in -->
-                    </div><!--/form-group-->
-
-                    <div class="form-group">
-                      <label class="control-label">Pre-defined Ranges & Callback</label>
-                      <button id="reportrange" data-drops="up" class="btn btn-block btn-default btn-lg">
-                        <i class="icon-rocket fa-fw"></i> <span>Please select Date Range</span>
-                      </button>
-                    </div><!--/form-group-->
-
-                  </form><!--/form-->
-                </div><!-- /panel-body -->
-              </div><!-- /panel-daterangepicker -->
-            </div><!-- /.cols -->
         </div><!-- /.content-body -->
 
 

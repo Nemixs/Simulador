@@ -34,15 +34,11 @@
   <!-- COMPONENTS -->
   <script src="<?php echo base_url()?>assets/scripts/select2.js"></script>
   <script src="<?php echo base_url()?>assets/scripts/jquery.bootstrap.wizard.js"></script>
-  <script src="<?php echo base_url()?>assets/scripts/daterangepicker.js"></script>
-
+  
   <script src="<?php echo base_url()?>assets/scripts/typeahead.bundle.js"></script>
-  <script src="<?php echo base_url()?>assets/scripts/jquery.tagsinput.js"></script>
   <script src="<?php echo base_url()?>assets/scripts/jquery.mask.js"></script>
-  <script src="<?php echo base_url()?>assets/scripts/select2.js"></script>
-  <script src="<?php echo base_url()?>assets/scripts/jquery.selectBoxit.js"></script>
   <script src="<?php echo base_url()?>assets/scripts/moment.js"></script>
-  <script src="<?php echo base_url()?>assets/scripts/jquery-minicolors.js"></script>
+  <script src="<?php echo base_url()?>assets/scripts/daterangepicker.js"></script>
   <!-- END COMPONENTS -->
 
   <!-- DUMMY: Use for demo -->
