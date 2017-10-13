@@ -48,8 +48,8 @@
     }
 
     function cuotaError(Valor){
-      if(Valor.value < 6){
-        $('#cuotaError').html('<span>El número de coutas debe ser superior a 6</span>');
+      if(Valor.value < 6 && Valor.value > 60){
+        $('#cuotaError').html('<span>El número de coutas debe ser superior a 6 e inferior a 60</span>');
       }
       else
         $('#cuotaError').html('<span></span>');
