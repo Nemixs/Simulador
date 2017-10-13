@@ -36,7 +36,7 @@
 
   <link rel="stylesheet" href="<?php echo base_url()?>assets/styles/wrapkit.css">
 
-  <link rel="stylesheet" href="<?php echo base_url()?>styles/components.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/styles/components.css">
 
   <link rel="stylesheet" href="<?php echo base_url()?>assets/styles/demo.css">
 </head>

@@ -1,3 +1,4 @@
+<body onload="load()">
   <!--[if lt IE 9]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -11,7 +12,7 @@
     <section class="content-wrapper" role="main">
       <div class="content">
         <div class="pull-right" role="group">
-          <a data-toggle="modal" href="#" data-scripts="<?php base_url()?>_includes/setups.js" data-target="#templateSetup" title="Template Setups" aria-label="template setups" class="btn btn-nofill btn-sm btn-default" href="#"><span class="icon-settings fa-lg text-muted"></span></a>
+          <a data-toggle="modal" href="#" data-scripts="<?php base_url()?>assets/_includes/setups.js" data-target="#templateSetup" title="Template Setups" aria-label="template setups" class="btn btn-nofill btn-sm btn-default" href="#"><span class="icon-settings fa-lg text-muted"></span></a>
         </div>
         <ul class="breadcrumb breadcrumb-angle">
           <li><a href="<?php base_url()?>" aria-label="home"><i class="fa fa-home"></i></a></li>
@@ -88,7 +89,7 @@
                       <div class="col-md-5">
                         <div class="input-group input-group-in">
                           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                          <input data-input="daterangepicker" data-single-date-picker="true" data-show-dropdowns="true" class="form-control">
+                          <input name="calendar" id="calendar" data-input="daterangepicker" data-single-date-picker="true" data-show-dropdowns="true" class="form-control">
                         </div>
                       </div><!-- /input-group-in -->
                     </div><!--/form-group-->
@@ -96,54 +97,62 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label" for="Cuotas">Agregar Meses de no Pago <span class="text-danger">*</span></label>
                       <div class="col-md-5">
-                        <input type="checkbox" class="js-switch" checked="checked">
+                        <input id="checkbox" type="checkbox" class="js-switch" onchange="mesesNoPago(this)">
                       </div>
                     </div><!-- /form-group -->
 
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="address">Primer Mes <span class="text-danger">*</span></label>
-                      <div class="col-md-5">
-                        <select class="form-control" id="inputSelect">
-                          <option>Seleccione un Mes</option>
-                          <option>Enero</option>
-                          <option>Febrero</option>
-                          <option>Marzo</option>
-                          <option>Abril</option>
-                          <option>Mayo</option>
-                          <option>Junio</option>
-                          <option>Julio</option>
-                          <option>Agosto</option>
-                          <option>Septiembre</option>
-                          <option>Octubre</option>
-                          <option>Noviembre</option>
-                          <option>Diciembre</option>
-                        </select>
-                      </div>
-                    </div><!-- /form-group -->
+                    <div id="meses">
+                      <div class="form-group">
+                        <label class="col-md-3 control-label" for="address">Primer Mes <span class="text-danger">*</span></label>
+                        <div class="col-md-5">
+                          <select class="form-control" id="inputSelect">
+                            <option>Seleccione un Mes</option>
+                            <option>Enero</option>
+                            <option>Febrero</option>
+                            <option>Marzo</option>
+                            <option>Abril</option>
+                            <option>Mayo</option>
+                            <option>Junio</option>
+                            <option>Julio</option>
+                            <option>Agosto</option>
+                            <option>Septiembre</option>
+                            <option>Octubre</option>
+                            <option>Noviembre</option>
+                            <option>Diciembre</option>
+                          </select>
+                        </div>
+                      </div><!-- /form-group -->
 
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="address">Segundo Mes <span class="text-danger">*</span></label>
-                      <div class="col-md-5">
-                        <select class="form-control" id="inputSelect">
-                          <option>Seleccione un Mes</option>
-                          <option>Enero</option>
-                          <option>Febrero</option>
-                          <option>Marzo</option>
-                          <option>Abril</option>
-                          <option>Mayo</option>
-                          <option>Junio</option>
-                          <option>Julio</option>
-                          <option>Agosto</option>
-                          <option>Septiembre</option>
-                          <option>Octubre</option>
-                          <option>Noviembre</option>
-                          <option>Diciembre</option>
-                        </select>
-                      </div>
-                    </div><!-- /form-group -->
+                      <div class="form-group">
+                        <label class="col-md-3 control-label" for="address">Segundo Mes <span class="text-danger">*</span></label>
+                        <div class="col-md-5">
+                          <select class="form-control" id="inputSelect">
+                            <option>Seleccione un Mes</option>
+                            <option>Enero</option>
+                            <option>Febrero</option>
+                            <option>Marzo</option>
+                            <option>Abril</option>
+                            <option>Mayo</option>
+                            <option>Junio</option>
+                            <option>Julio</option>
+                            <option>Agosto</option>
+                            <option>Septiembre</option>
+                            <option>Octubre</option>
+                            <option>Noviembre</option>
+                            <option>Diciembre</option>
+                          </select>
+                        </div>
+                    </div>
                     
+                    </div><!-- /form-group -->
+
                   </div><!-- /.tab-pane -->
                   <div class="tab-pane fade" id="wizard3">
+                    <div>
+                      <div>
+                        <span class="glyphicon glyphicon-check fa-3x" aria-hidden="true"></span>  
+                      </div>
+                    </div>
                     <h3 class="lead">Provide your payment details</h3>
                     <div class="form-group">
                       <label class="col-md-3 control-label" for="cardName">Name on card <span class="text-danger">*</span></label>

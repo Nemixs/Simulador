@@ -10,6 +10,29 @@
 
   </main><!-- /#MAIN -->
 
+  <script type="text/javascript">
+    function load() {
+    $("#calendar").daterangepicker({
+      locale: {
+        format: "DD/MM/YYYY"
+      },
+      singleDatePicker: true,
+      "minDate": "13/10/2017"
+    });
+    $("#meses").hide();
+    }
+
+    function mesesNoPago(Check){
+      if (Check.checked){
+        $("#meses").show();
+      }
+      else{
+        $("#meses").hide();
+      }
+    }
+   
+  </script>
+
 
   <!-- VENDORS : jQuery & Bootstrap -->
   <script src="<?php echo base_url()?>assets/scripts/vendor.js"></script>
