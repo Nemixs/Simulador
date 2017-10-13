@@ -39,5 +39,13 @@
   <link rel="stylesheet" href="<?php echo base_url()?>assets/styles/components.css">
 
   <link rel="stylesheet" href="<?php echo base_url()?>assets/styles/demo.css">
+
+  <script type="text/javascript">
+    // Esta función nos permite tener acceso a la BaseUrl de manera global en cualquier función JavaScript
+    //var base_url = 'http://localhost:8888/Ventas2/';
+    var base_url = "<?php echo base_url(); ?>"
+  </script>
+
+  <?php header('Access-Control-Allow-Origin: *'); ?>
 </head>
 <body>

@@ -55,14 +55,14 @@
             </div>
 
             <div class="panel-body">
-              <form action="#" role="form" class="form-horizontal">
+              <form name="formulario" action="<?php echo base_url()?>Simulador/calcular" role="form" class="form-horizontal" method="post">
                 <div class="tab-content">
                   <div class="tab-pane fade in" id="wizard1">
-                    <div class="form-group">
+                    <div id="rutSuccess" class="form-group">
                       <label class="col-md-3 control-label" for="Rut">Rut <span class="text-danger">*</span></label>
                       <div class="col-md-5">
                         <div class="input-group input-group-in">
-                          <input class="form-control" id="rut" name="rut">
+                          <input class="form-control" id="rut" name="rut" onchange="validarRut(this)" required="">
                           <span class="input-group-addon"><i class="icon-user text-muted"></i></span>
                         </div>
                       </div>
@@ -73,14 +73,16 @@
                     <div class="form-group">
                       <label class="col-md-3 control-label" for="Monto">Ingresa Monto <span class="text-danger">*</span></label>
                       <div class="col-md-5">
-                        <input class="form-control" id="monto" name="monto" type="number">
+                        <input id="monto" class="form-control" id="monto" name="monto" type="number" value="3000000" onkeypress="montoError(this); return event.charCode >= 48 && event.charCode <= 57" min="500000">
+                        <span id="montoError" class="text-danger"></span>
                       </div>
                     </div><!-- /form-group -->
 
                     <div class="form-group">
                       <label class="col-md-3 control-label" for="Cuotas">Ingresa número de Cuotas <span class="text-danger">*</span></label>
                       <div class="col-md-5">
-                        <input class="form-control" id="cuotas" name="cuotas" type="number">
+                        <input id="cuotas" class="form-control" id="cuotas" name="cuotas" type="number" onkeypress="cuotaError(this); return event.charCode >= 48 && event.charCode <= 57" min="6">
+                          <span id="cuotaError" class="text-danger"></span>
                       </div>
                     </div><!-- /form-group -->
 
@@ -105,20 +107,20 @@
                       <div class="form-group">
                         <label class="col-md-3 control-label" for="address">Primer Mes <span class="text-danger">*</span></label>
                         <div class="col-md-5">
-                          <select class="form-control" id="inputSelect">
+                          <select class="form-control" id="inputSelect" onchange="mesNoPago(this)">
                             <option>Seleccione un Mes</option>
-                            <option>Enero</option>
-                            <option>Febrero</option>
-                            <option>Marzo</option>
-                            <option>Abril</option>
-                            <option>Mayo</option>
-                            <option>Junio</option>
-                            <option>Julio</option>
-                            <option>Agosto</option>
-                            <option>Septiembre</option>
-                            <option>Octubre</option>
-                            <option>Noviembre</option>
-                            <option>Diciembre</option>
+                            <option value="p1">Enero</option> <!-- sacar 'p' -->
+                            <option value="p2">Febrero</option>
+                            <option value="p3">Marzo</option>
+                            <option value="p4">Abril</option>
+                            <option value="p5">Mayo</option>
+                            <option value="p6">Junio</option>
+                            <option value="p7">Julio</option>
+                            <option value="p8">Agosto</option>
+                            <option value="p9">Septiembre</option>
+                            <option value="p10">Octubre</option>
+                            <option value="p11">Noviembre</option>
+                            <option value="p12">Diciembre</option>
                           </select>
                         </div>
                       </div><!-- /form-group -->
@@ -126,20 +128,20 @@
                       <div class="form-group">
                         <label class="col-md-3 control-label" for="address">Segundo Mes <span class="text-danger">*</span></label>
                         <div class="col-md-5">
-                          <select class="form-control" id="inputSelect">
+                          <select class="form-control" id="inputSelect2">
                             <option>Seleccione un Mes</option>
-                            <option>Enero</option>
-                            <option>Febrero</option>
-                            <option>Marzo</option>
-                            <option>Abril</option>
-                            <option>Mayo</option>
-                            <option>Junio</option>
-                            <option>Julio</option>
-                            <option>Agosto</option>
-                            <option>Septiembre</option>
-                            <option>Octubre</option>
-                            <option>Noviembre</option>
-                            <option>Diciembre</option>
+                            <option value="s1">Enero</option>
+                            <option value="s2">Febrero</option>
+                            <option value="s3">Marzo</option>
+                            <option value="s4">Abril</option>
+                            <option value="s5">Mayo</option>
+                            <option value="s6">Junio</option>
+                            <option value="s7">Julio</option>
+                            <option value="s8">Agosto</option>
+                            <option value="s9">Septiembre</option>
+                            <option value="s10">Octubre</option>
+                            <option value="s11">Noviembre</option>
+                            <option value="s12">Diciembre</option>
                           </select>
                         </div>
                     </div>
@@ -207,7 +209,7 @@
                     <div class="form-group">
                       <div class="col-md-5 col-md-offset-3">
                         <button type="button" class="btn btn-default wizard-prev"><i class="fa fa-arrow-circle-o-left"></i> Back</button>
-                        <button type="button" class="btn btn-primary wizard-next">Continue <i class="fa fa-arrow-circle-o-right"></i></button>
+                        <button id="boton" type="button" class="btn btn-primary wizard-next" disabled="">Continuar <i class="fa fa-arrow-circle-o-right"></i></button>
                         <button type="submit" class="btn btn-primary finish">Submit</button>
                       </div><!-- /.cols -->
                     </div><!-- /form-group -->

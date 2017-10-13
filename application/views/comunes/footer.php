@@ -30,6 +30,87 @@
         $("#meses").hide();
       }
     }
+
+    function getFecha(){
+      return "13/10/2017";
+    }
+
+    function getMes(Index){
+      return "mes";
+    }
+
+    function montoError(Valor){
+      if(Valor.value < 500000){
+        $('#montoError').html('<span>El monto debe ser superior a $500.000</span>');
+      }
+      else
+        $('#montoError').html('<span></span>');
+    }
+
+    function cuotaError(Valor){
+      if(Valor.value < 6){
+        $('#cuotaError').html('<span>El número de coutas debe ser superior a 6</span>');
+      }
+      else
+        $('#cuotaError').html('<span></span>');
+    }
+
+    function validarRut(Rut){
+      var param = {
+        "Rut": Rut.value
+      };
+      $.ajax({
+        type: "POST",
+        url: base_url + "validarRut",
+        data: param,
+        success: function(respuesta){
+          if(respuesta == '<div style="display:none">1</div>'){
+             document.getElementById("rutSuccess").className = "form-group has-success";
+             formulario.boton.disabled = false;
+          }
+          else{
+             document.getElementById("rutSuccess").className = "form-group has-warning";
+             formulario.boton.disabled = true;
+          }
+        }
+      })
+    }
+
+    function calcular(){
+      var param = {
+        "Monto": document.getElementsById("monto"),
+        "Cuotas": document.getElementsById("cuotas"),
+        "FechaPago": getFecha(),
+        "PrimerMes": getMes(1),
+        "SegundoMes": getMes(2)
+      };
+      $.ajax({
+        type: "POST",
+        url: "http://localhost/Simulador/calcular",
+        data: param,
+        dataType: "json",
+        success: function(respuesta){
+          document.getElementsById("ResultadoCredito") = respuesta[0];
+        }
+      });
+    }
+
+    function mesNoPago(Select){
+      var param = {
+        "PrimerMes": Select.value
+      };
+      $.ajax({
+        type: "POST",
+        data: param,
+        url: base_url + "ocultarMes",
+        dataType: "json",
+        success: function(respuesta){
+          $("#inputSelect2 option[value=" + respuesta[0] + "]").wrap("<span>");
+          $("#inputSelect2 option[value=" + respuesta[1] + "]").wrap("<span>");
+          $("#inputSelect2 option[value=" + respuesta[2] + "]").wrap("<span>");
+        }
+      });
+    }
    
   </script>
 

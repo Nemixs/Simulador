@@ -18,10 +18,68 @@ class Simulador extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct()
+    {
+        parent::__construct();
+    }
+
 	public function index()
 	{
 		$this->load->view('comunes/head');
 		$this->load->view('simulador');
 		$this->load->view('comunes/footer');
+	}
+
+	public function ocultarMes(){
+		$mes = $this->input->post('PrimerMes');
+
+		$array = array();
+
+		if($mes == "p1"){
+			$menos = "s12";
+			$mas = "s2";
+		}
+		else if ($mes == "p12"){
+			$menos = "s11";
+			$mas = "s1";
+		}
+		else{
+			$menos = "s" .+ (((int)substr($mes, -1)) - 1);
+			$mas = "s" .+ (((int)substr($mes, -1)) + 1);
+		}
+
+		$array[0] = $menos;
+		$array[1] = $mas;
+		$array[2] = ("s" .+ substr($mes, -1));
+
+		echo json_encode($array);
+	}
+
+	public function validarRut(){
+		$rut = $this->input->post('Rut');
+		$rut = preg_replace('/[^k0-9]/i', '', $rut);
+	    $dv  = substr($rut, -1);
+		$numero = substr($rut, 0, strlen($rut)-1);
+		$i = 2;
+		$suma = 0;
+		foreach(array_reverse(str_split($numero)) as $v){
+			if($i==8)
+				$i = 2;
+			$suma += $v * $i;
+			++$i;
+		}
+		$dvr = 11 - ($suma % 11);
+
+		if($dvr == 11)
+			$dvr = 0;
+		if($dvr == 10)
+			$dvr = 'K';
+		if($dvr == strtoupper($dv)){
+			echo '<div style="display:none">1</div>';
+			return true;
+		}
+		else
+			return false;
 	}
 }
