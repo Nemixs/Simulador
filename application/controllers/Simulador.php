@@ -82,21 +82,22 @@ class Simulador extends CI_Controller {
 			return false;
 	}
 
-	public function calcular(){
+		public function calcular(){
 		$monto = $this->input->post('Monto');
 		$num_cuotas = $this->input->post('Cuotas');
 		$fecha = $this->input->post('FechaPago');
 		$primerMes = $this->input->post('PrimerMes');
 		$segundoMes = $this->input->post('SegundoMeso');
+		$impuestos = 25430;
 		$CAE = 28.33;
 		$seguros = 152167;
 		$gastosNot = 1111;
-		$total = $monto + $seguros;
+		$total = $monto + $seguros + $gastosNot + $impuestos;
 
 //		if($monto > 3000000 && $monto < 6999999){
 			$interes = 0.0182;
 			$cuota = ($total * $interes) / (1 - (1 + $interes) ** $num_cuotas);
-			$total_cred = $cuota * $num_cuotas;
+			$total_cred = $cuota * $num_cuotas + $total;
 //		}
 		
 	
@@ -106,11 +107,12 @@ class Simulador extends CI_Controller {
 		$arrayName[1] = $seguros;
 		$arrayName[2] = $gastosNot;
 		$arrayName[3] = $CAE;
-		$arrayName[4] = ($interes*100);
-		$arrayName[5] = $total_cred;
-		$arrayName[6] = $cuota;
-		$arrayName[7] = $primerMes;
-		$arrayName[8] = $segundoMes;
+		$arrayName[4] = $impuestos;
+		$arrayName[5] = ($interes*100);
+		$arrayName[6] = $total_cred;
+		$arrayName[7] = $cuota;
+		$arrayName[8] = $primerMes;
+		$arrayName[9] = $segundoMes;
 
 		return $arrayName;
 
