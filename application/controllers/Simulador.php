@@ -87,32 +87,77 @@ class Simulador extends CI_Controller {
 		$num_cuotas = $this->input->post('Cuotas');
 		$fecha = $this->input->post('FechaPago');
 		$primerMes = $this->input->post('PrimerMes');
-		$segundoMes = $this->input->post('SegundoMeso');
-		$CAE = 28.33;
-		$seguros = 152167;
+		$segundoMes = $this->input->post('SegundoMes');
+		$total_cred = 0;
+		$interes = 0;
+		$cuota = 0;
+		$impuestos =0;
+		$CAE = 0;
+		$seguros = 0;
 		$gastosNot = 1111;
-		$total = $monto + $seguros;
+		$total = 0;
 
-//		if($monto > 3000000 && $monto < 6999999){
-			$interes = 0.0182;
-			$cuota = ($total * $interes) / (1 - (1 + $interes) ** $num_cuotas);
-			$total_cred = $cuota * $num_cuotas;
-//		}
-		
-	
+		if($monto >= 1000000 && $monto <= 2999999){
+			if ($num_cuotas >= 6 && $num_cuotas <= 24) {
+				$impuestos = 8483;
+				$seguros = 50761;
+				$CAE = 28.44;
+			}
 
-		$arrayName = array();
-		$arrayName[0] = $total;
-		$arrayName[1] = $seguros;
-		$arrayName[2] = $gastosNot;
-		$arrayName[3] = $CAE;
-		$arrayName[4] = ($interes*100);
-		$arrayName[5] = $total_cred;
-		$arrayName[6] = $cuota;
-		$arrayName[7] = $primerMes;
-		$arrayName[8] = $segundoMes;
+			if ($num_cuotas >= 25 && $num_cuotas <= 36){
+				$impuestos = 8689;
+				$seguros = 76370;
+				$CAE = 28.44;
+			}
+		}
 
-		return $arrayName;
+		if($monto >= 3000000 && $monto <= 6999999){
+			if ($num_cuotas >= 6 && $num_cuotas <= 24) {
+				$impuestos = 26049;
+				$seguros = 152169;
+				$CAE = 21.84;
+			}
 
+			if ($num_cuotas >= 25 && $num_cuotas <= 36){
+				$impuestos = 26049;
+				$seguros = 228943;
+				$CAE = 21.84;
+			}
+		}
+
+		if($monto >= 7000000){
+			if ($num_cuotas >= 6 && $num_cuotas <= 24) {
+				$impuestos = 59323;
+				$seguros = 354984;
+				$CAE = 20.04;
+			}
+
+			if ($num_cuotas >= 25 && $num_cuotas <= 36){
+				$impuestos = 60768;
+				$seguros = 534083;
+				$CAE = 20.04;
+			}
+		}
+
+		$total = $monto + $seguros + $gastosNot + $impuestos;
+		$interes = ($CAE / 12) / 100;
+		$var = 1 + $interes;
+		$sup = (pow($var, $num_cuotas));
+		$cuota = $total * (($sup*$interes)/($sup-1));
+		$total_cred = $cuota * $num_cuotas + $total;
+
+		$datos = array();
+		$datos[0] = round($total);
+		$datos[1] = round($seguros);
+		$datos[2] = round($gastosNot);
+		$datos[3] = $CAE;
+		$datos[4] = round($impuestos);
+		$datos[5] = round(($interes*100),2);
+		$datos[6] = round($total_cred);
+		$datos[7] = round($cuota);
+		$datos[8] = $primerMes;
+		$datos[9] = $segundoMes;
+
+		echo json_encode($datos);
 	}
 }
