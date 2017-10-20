@@ -1,7 +1,8 @@
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tests extends CI_Controller {
+class Mutante extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,7 +27,7 @@ class Tests extends CI_Controller {
 
 	public function index(){
 	//	Testeo función Ocultar Meses
-		$test = $this->ocultarMes($_POST['PrimerMes'] = "p5");
+		$test = $this->ocultarMesMutante($_POST['PrimerMes'] = "p5");
 		$array[0] = "s4";
 		$array[1] = "s6";
 		$array[2] = "s5";
@@ -36,14 +37,14 @@ class Tests extends CI_Controller {
 		echo $this->unit->run($test, $expexted_result, $test_name);
 
 	//  Testeo función Validar Rut
-		$test = $this->validarRut($_POST['Rut'] = "19164187-6");
+		$test = $this->validarRutMutante($_POST['Rut'] = "19164187-6");
 		$expexted_result = true;
 		$test_name = "Validación Dígito Verificador";
 
 		echo $this->unit->run($test, $expexted_result, $test_name);
 
 	//  Testeo función Calcular
-		$test = $this->calcular($_POST['Monto'] = 3000000, $_POST["Cuotas"] = 6, $_POST["FechaPago"] = "20/10/2017", $_POST["PrimerMes"] = "p1", $_POST["SegundoMes"] = "s5");
+		$test = $this->calcularMutante($_POST['Monto'] = 3000000, $_POST["Cuotas"] = 6, $_POST["FechaPago"] = "20/10/2017", $_POST["PrimerMes"] = "p1", $_POST["SegundoMes"] = "s5");
 		$array[0] = 3179329;
 		$array[1] = 152169;
 		$array[2] = 1111;
@@ -58,22 +59,29 @@ class Tests extends CI_Controller {
 		$test_name = "Validación Calcular Crédito de Consumo";
 		echo $this->unit->run($test, $expexted_result, $test_name);
 	}
-	public function ocultarMes(){
+
+
+
+
+//funciones mutantes
+
+
+	public function ocultarMesMutante(){
 		$mes = $this->input->post('PrimerMes');
 
 		$array = array();
 
-		if($mes == "p1"){
+		if($mes != "p1"){
 			$menos = "s12";
 			$mas = "s2";
 		}
-		else if ($mes == "p12"){
+		else if ($mes != "p12"){
 			$menos = "s11";
 			$mas = "s1";
 		}
 		else{
-			$menos = "s" .+ (((int)substr($mes, -1)) - 1);
-			$mas = "s" .+ (((int)substr($mes, -1)) + 1);
+			$menos = "s" .+ (((int)substr($mes, -1)) + 1);
+			$mas = "s" .+ (((int)substr($mes, -1)) - 1);
 		}
 
 		$array[0] = $menos;
@@ -83,34 +91,37 @@ class Tests extends CI_Controller {
 		return json_encode($array);
 	}
 
-	public function validarRut(){
-	$rut = $this->input->post('Rut');
-	$rut = preg_replace('/[^k0-9]/i', '', $rut);
-	$dv  = substr($rut, -1);
-	$numero = substr($rut, 0, strlen($rut)-1);
-	$i = 2;
-	$suma = 0;
-	foreach(array_reverse(str_split($numero)) as $v){
-		if($i==8)
+	public function validarRutMutante(){
+		$rut = $this->input->post('Rut');
+		$rut = preg_replace('/[^k0-9]/i', '', $rut);
+		$dv  = substr($rut, -1);
+		$numero = substr($rut, 0, strlen($rut)-1);
 		$i = 2;
-		$suma += $v * $i;
-		++$i;
-	}
-	$dvr = 11 - ($suma % 11);
+		$suma = 0;
+		foreach(array_reverse(str_split($numero)) as $v){
+			if($i!=8)
+				$i = 3	;
+			$suma += $v * $i;
+			++$i;
+		}
+		$dvr = 11 - ($suma % 11);
 
-	if($dvr == 11)
-		$dvr = 0;
-	if($dvr == 10)
-		$dvr = 'K';
-	if($dvr == strtoupper($dv)){
-		echo '<div style="display:none">1</div>';
-		return true;
-	}
-	else
-		return false;
+		if($dvr != 11)
+			$dvr = 0;
+		if($dvr != 10)
+			$dvr = 'K';
+		if($dvr == strtoupper($dv)){
+			echo '<div style="display:none">1</div>';
+			return true;
+		}
+		else
+			return false;
+
+		//15 mutante
 	}
 
-	public function calcular(){
+
+	public function calcularMutante(){
 		$monto = $this->input->post('Monto');
 		$num_cuotas = $this->input->post('Cuotas');
 		$fecha = $this->input->post('FechaPago');
@@ -125,35 +136,35 @@ class Tests extends CI_Controller {
 		$gastosNot = 1111;
 		$total = 0;
 
-		if($monto >= 1000000 && $monto <= 2999999){
+		if($monto <= 1000000 && $monto >= 2999999){
 			if ($num_cuotas >= 6 && $num_cuotas <= 24) {
 				$impuestos = 8483;
 				$seguros = 50761;
 				$CAE = 28.44;
 			}
 
-			if ($num_cuotas >= 25 && $num_cuotas <= 36){
+			if ($num_cuotas >= 25 || $num_cuotas <= 36){
 				$impuestos = 8689;
 				$seguros = 76370;
 				$CAE = 28.44;
 			}
 		}
 
-		if($monto >= 3000000 && $monto <= 6999999){
-			if ($num_cuotas >= 6 && $num_cuotas <= 24) {
+		if($monto <= 3000000 && $monto <= 6999999){
+			if ($num_cuotas >= 6 || $num_cuotas <= 24) {
 				$impuestos = 26049;
 				$seguros = 152169;
 				$CAE = 21.84;
 			}
 
-			if ($num_cuotas >= 25 && $num_cuotas <= 36){
+			if ($num_cuotas >= 25 || $num_cuotas <= 36){
 				$impuestos = 26049;
 				$seguros = 228943;
 				$CAE = 21.84;
 			}
 		}
 
-		if($monto >= 7000000){
+		if($monto <= 7000000){
 			if ($num_cuotas >= 6 && $num_cuotas <= 24) {
 				$impuestos = 59323;
 				$seguros = 354984;
@@ -167,7 +178,7 @@ class Tests extends CI_Controller {
 			}
 		}
 
-		$total = $monto + $seguros + $gastosNot + $impuestos;
+		$total = $monto - $seguros - $gastosNot + $impuestos;
 		$interes = ($CAE / 12) / 100;
 		$var = 1 + $interes;
 		$sup = (pow($var, $num_cuotas));
@@ -188,5 +199,4 @@ class Tests extends CI_Controller {
 
 		return json_encode($datos);
 	}
-
 }
