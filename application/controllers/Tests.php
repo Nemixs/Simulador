@@ -24,8 +24,8 @@ class Tests extends CI_Controller {
 		$this->load->library('unit_test');
 	}
 
-	public function index()
-	{
+	public function index(){
+	//	Testeo función Ocultar Meses
 		$test = $this->ocultarMes($_POST['PrimerMes'] = "p5");
 		$array[0] = "s4";
 		$array[1] = "s6";
@@ -34,9 +34,16 @@ class Tests extends CI_Controller {
 		$test_name = "Ocultar meses contiguos";
 		
 		echo $this->unit->run($test, $expexted_result, $test_name);
+
+	//  Testeo función Validar Rut
+		$test = $this->validarRut($_POST['Rut'] = "19164187-6");
+		$expexted_result = true;
+		$test_name = "Validación Dígito Verificador";
+
+        echo $this->unit->run($test, $expexted_result, $test_name);
 	}
 
-	private function ocultarMes(){
+	public function ocultarMes(){
 		$mes = $this->input->post('PrimerMes');
 
 		$array = array();
@@ -59,5 +66,32 @@ class Tests extends CI_Controller {
 		$array[2] = ("s" .+ substr($mes, -1));
 
 		return json_encode($array);
+	}
+
+	public function validarRut(){
+	$rut = $this->input->post('Rut');
+	$rut = preg_replace('/[^k0-9]/i', '', $rut);
+	$dv  = substr($rut, -1);
+	$numero = substr($rut, 0, strlen($rut)-1);
+	$i = 2;
+	$suma = 0;
+	foreach(array_reverse(str_split($numero)) as $v){
+		if($i==8)
+		$i = 2;
+		$suma += $v * $i;
+		++$i;
+	}
+	$dvr = 11 - ($suma % 11);
+
+	if($dvr == 11)
+		$dvr = 0;
+	if($dvr == 10)
+		$dvr = 'K';
+	if($dvr == strtoupper($dv)){
+		echo '<div style="display:none">1</div>';
+		return true;
+	}
+	else
+		return false;
 	}
 }

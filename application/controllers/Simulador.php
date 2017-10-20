@@ -21,8 +21,8 @@ class Simulador extends CI_Controller {
 	 */
 
 	public function __construct(){
-        parent::__construct();
-    }
+		parent::__construct();
+	}
 
 	public function index(){
 		$this->load->view('comunes/head');
@@ -58,7 +58,7 @@ class Simulador extends CI_Controller {
 	public function validarRut(){
 		$rut = $this->input->post('Rut');
 		$rut = preg_replace('/[^k0-9]/i', '', $rut);
-	    $dv  = substr($rut, -1);
+		$dv  = substr($rut, -1);
 		$numero = substr($rut, 0, strlen($rut)-1);
 		$i = 2;
 		$suma = 0;
