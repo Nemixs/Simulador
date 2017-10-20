@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//! defined('BASEPATH')? define('BASEPATH', 1):null;
 
 class Simulador extends CI_Controller {
 
@@ -19,13 +20,11 @@ class Simulador extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
-	public function __construct()
-    {
+	public function __construct(){
         parent::__construct();
     }
 
-	public function index()
-	{
+	public function index(){
 		$this->load->view('comunes/head');
 		$this->load->view('simulador');
 		$this->load->view('comunes/footer');
